@@ -45,6 +45,12 @@
     <ClInclude Include="Inject.h">
       <Filter>头文件\Inject</Filter>
     </ClInclude>
+    <ClInclude Include="DialogAttach.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ProcTool.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="InjectTools.cpp">
@@ -61,6 +67,12 @@
     </ClCompile>
     <ClCompile Include="Inject.cpp">
       <Filter>源文件\Inject</Filter>
+    </ClCompile>
+    <ClCompile Include="DialogAttach.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="ProcTool.cpp">
+      <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

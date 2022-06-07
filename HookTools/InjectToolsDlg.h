@@ -40,4 +40,5 @@ public:
 	CButton m_btn_attach;
 	afx_msg void OnBnClickedBtnOpen();
 	afx_msg void OnBnClickedBtnInject();
+	afx_msg void OnBnClickedBtnAttach();
 };

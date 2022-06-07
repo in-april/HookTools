@@ -13,6 +13,7 @@
 #endif
 #include "Setting.h"
 #include "Inject.h"
+#include "DialogAttach.h"
 
 CSetting g_setting;
 
@@ -40,6 +41,7 @@ BEGIN_MESSAGE_MAP(CInjectToolsDlg, CDialogEx)
 	ON_CBN_SELCHANGE(IDC_COMBO_TYPE, &CInjectToolsDlg::OnCbnSelchangeComboType)
 	ON_BN_CLICKED(IDC_BTN_OPEN, &CInjectToolsDlg::OnBnClickedBtnOpen)
 	ON_BN_CLICKED(IDC_BTN_INJECT, &CInjectToolsDlg::OnBnClickedBtnInject)
+	ON_BN_CLICKED(IDC_BTN_ATTACH, &CInjectToolsDlg::OnBnClickedBtnAttach)
 END_MESSAGE_MAP()
 
 
@@ -216,5 +218,15 @@ void CInjectToolsDlg::OnBnClickedBtnInject()
 	default:
 		break;
 	}
-	
+
+}
+
+void CInjectToolsDlg::OnBnClickedBtnAttach()
+{
+	// TODO: 在此添加控件通知处理程序代码
+	CDialogAttach dlg;
+	if (dlg.DoModal() == IDOK)
+	{
+		m_edit_proc.SetWindowTextA(dlg.m_pid);
+	}
 }
