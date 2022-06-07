@@ -1,5 +1,5 @@
 ﻿
-// HookTools.h: PROJECT_NAME 应用程序的主头文件
+// InjectTools.h: PROJECT_NAME 应用程序的主头文件
 //
 
 #pragma once
@@ -11,14 +11,14 @@
 #include "resource.h"		// 主符号
 
 
-// CHookToolsApp:
-// 有关此类的实现，请参阅 HookTools.cpp
+// CInjectToolsApp:
+// 有关此类的实现，请参阅 InjectTools.cpp
 //
 
-class CHookToolsApp : public CWinApp
+class CInjectToolsApp : public CWinApp
 {
 public:
-	CHookToolsApp();
+	CInjectToolsApp();
 
 // 重写
 public:
@@ -29,4 +29,4 @@ public:
 	DECLARE_MESSAGE_MAP()
 };
 
-extern CHookToolsApp theApp;
+extern CInjectToolsApp theApp;

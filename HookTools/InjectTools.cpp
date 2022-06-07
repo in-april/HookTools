@@ -1,41 +1,41 @@
 ﻿
-// HookTools.cpp: 定义应用程序的类行为。
+// InjectTools.cpp: 定义应用程序的类行为。
 //
 
 #include "pch.h"
 #include "framework.h"
-#include "HookTools.h"
-#include "HookToolsDlg.h"
+#include "InjectTools.h"
+#include "InjectToolsDlg.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
 #endif
 
 
-// CHookToolsApp
+// CInjectToolsApp
 
-BEGIN_MESSAGE_MAP(CHookToolsApp, CWinApp)
+BEGIN_MESSAGE_MAP(CInjectToolsApp, CWinApp)
 	ON_COMMAND(ID_HELP, &CWinApp::OnHelp)
 END_MESSAGE_MAP()
 
 
-// CHookToolsApp 构造
+// CInjectToolsApp 构造
 
-CHookToolsApp::CHookToolsApp()
+CInjectToolsApp::CInjectToolsApp()
 {
 	// TODO: 在此处添加构造代码，
 	// 将所有重要的初始化放置在 InitInstance 中
 }
 
 
-// 唯一的 CHookToolsApp 对象
+// 唯一的 CInjectToolsApp 对象
 
-CHookToolsApp theApp;
+CInjectToolsApp theApp;
 
 
-// CHookToolsApp 初始化
+// CInjectToolsApp 初始化
 
-BOOL CHookToolsApp::InitInstance()
+BOOL CInjectToolsApp::InitInstance()
 {
 	// 如果一个运行在 Windows XP 上的应用程序清单指定要
 	// 使用 ComCtl32.dll 版本 6 或更高版本来启用可视化方式，
@@ -68,7 +68,7 @@ BOOL CHookToolsApp::InitInstance()
 	// 例如修改为公司或组织名
 	SetRegistryKey(_T("应用程序向导生成的本地应用程序"));
 
-	CHookToolsDlg dlg;
+	CInjectToolsDlg dlg;
 	m_pMainWnd = &dlg;
 	INT_PTR nResponse = dlg.DoModal();
 	if (nResponse == IDOK)
@@ -101,4 +101,3 @@ BOOL CHookToolsApp::InitInstance()
 	//  而不是启动应用程序的消息泵。
 	return FALSE;
 }
-

@@ -13,12 +13,18 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="源文件\Inject">
+      <UniqueIdentifier>{c561ccd6-3c9f-4598-a958-8f7e5253aca7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\Inject">
+      <UniqueIdentifier>{06b8f42f-a7fe-4b4b-8527-58c7cba1b0f3}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="HookTools.h">
+    <ClInclude Include="InjectTools.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="HookToolsDlg.h">
+    <ClInclude Include="InjectToolsDlg.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="framework.h">
@@ -33,30 +39,42 @@
     <ClInclude Include="pch.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="Setting.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Inject.h">
+      <Filter>头文件\Inject</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="HookTools.cpp">
+    <ClCompile Include="InjectTools.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="HookToolsDlg.cpp">
+    <ClCompile Include="InjectToolsDlg.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="pch.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="Setting.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Inject.cpp">
+      <Filter>源文件\Inject</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="HookTools.rc">
+    <ResourceCompile Include="InjectTools.rc">
       <Filter>资源文件</Filter>
     </ResourceCompile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="res\HookTools.rc2">
+    <None Include="res\InjectTools.rc2">
       <Filter>资源文件</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Image Include="res\HookTools.ico">
+    <Image Include="res\InjectTools.ico">
       <Filter>资源文件</Filter>
     </Image>
   </ItemGroup>
