@@ -94,6 +94,7 @@ BOOL CInject::SetRemoteData(PREMOTE_DATA _data, TCHAR* dllName)
 	HMODULE hKernel = LoadLibrary(_T("kernel32.dll"));
 	if (!hKernel) return FALSE;
 	_data->loadLibrary = (PLoadLibrary)GetProcAddress(hKernel, "LoadLibraryA");
+	if (!_data->loadLibrary) return FALSE;
 	//_data->getModuleHandle = (PGetModuleHandle)GetProcAddress(hKernel, "GetModuleHandleA");
 	int len = 0;
 	while (dllName[len++]);
@@ -124,5 +125,22 @@ int CInject::InjectByOEP(std::string modulePath)
 
 int CInject::InjectByRemoteThread(std::string modulePath)
 {
+	LPVOID remoteAddr = VirtualAllocEx(m_hProcess, 0, 0x1000, MEM_COMMIT, PAGE_EXECUTE_READWRITE);
+
+	TRACE("Inject address is 0x%08x\n", remoteAddr);
+	if (!remoteAddr) return NULL;
+
+	SIZE_T writeSize = 0;
+	REMOTE_DATA remoteData{ 0 };
+	BOOL ret = SetRemoteData(&remoteData, (char*)modulePath.c_str());
+	if (!ret) return -1;
+	//写入远程数据
+	WriteProcessMemory(m_hProcess, remoteAddr, &remoteData, 0x1000, &writeSize);
+	DWORD threadId;
+	HANDLE hNewThread = CreateRemoteThreadEx(m_hProcess, NULL, 0,
+		(LPTHREAD_START_ROUTINE)remoteData.loadLibrary,
+		remoteAddr, 0, NULL, &threadId);
+	if (!hNewThread) return -2;
+	CloseHandle(hNewThread);
 	return 0;
 }

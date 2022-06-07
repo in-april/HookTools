@@ -176,18 +176,45 @@ void CInjectToolsDlg::OnBnClickedBtnInject()
 {
 	// TODO: 在此添加控件通知处理程序代码
 	int len = m_modules.GetItemCount();
-	for (int i = 0; i < len; i++)
+	int nIndex = m_types.GetCurSel();
+	switch (nIndex)
 	{
-		if (m_modules.GetCheck(i))
+	case 0: //入口点注入
+	{
+		for (int i = 0; i < len; i++)
 		{
-			CString path = m_modules.GetItemText(i, 2);
-			//注入
-			CInject inject;
-			CString proc_path;
-			m_edit_path.GetWindowTextA(proc_path);
-			inject.StartProcess(proc_path.GetBuffer());
-			inject.InjectByOEP(path.GetBuffer());
+			if (m_modules.GetCheck(i))
+			{
+				CString path = m_modules.GetItemText(i, 2);
+				//注入
+				CInject inject;
+				CString proc_path;
+				m_edit_path.GetWindowTextA(proc_path);
+				inject.StartProcess(proc_path.GetBuffer());
+				inject.InjectByOEP(path.GetBuffer());
+				m_modules.SetCheck(i, false);
+			}
 		}
-		
 	}
+	case 1: //远程线程注入
+	{
+		for (int i = 0; i < len; i++)
+		{
+			if (m_modules.GetCheck(i))
+			{
+				CString path = m_modules.GetItemText(i, 2);
+				//注入
+				CInject inject;
+				CString pid;
+				m_edit_proc.GetWindowTextA(pid);
+				inject.AttachProcess(atoi(pid));
+				inject.InjectByRemoteThread(path.GetBuffer());
+				m_modules.SetCheck(i, false);
+			}
+		}
+	}
+	default:
+		break;
+	}
+	
 }

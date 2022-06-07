@@ -1,12 +1,12 @@
 #pragma once
 #include <string>
 
-typedef DWORD(WINAPI* PLoadLibrary)(wchar_t* dllName);
-typedef DWORD(WINAPI* PGetModuleHandle)(wchar_t* dllName);
+typedef DWORD(WINAPI* PLoadLibrary)(char* dllName);
+
 //注入的数据格式
 typedef struct
 {
-	wchar_t dllName[0xff];
+	char dllName[0xff];
 
 	//变量
 	//入口点
