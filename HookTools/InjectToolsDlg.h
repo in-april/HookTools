@@ -43,4 +43,10 @@ public:
 	afx_msg void OnBnClickedBtnInject();
 	afx_msg void OnBnClickedBtnAttach();
 	afx_msg void OnBnClickedBtnAddModule();
+	afx_msg void OnMenuUpdate();
+	afx_msg void OnMenuDel();
+	afx_msg void OnNMRClickList3(NMHDR* pNMHDR, LRESULT* pResult);
+	int listSelect;
+	afx_msg void OnBnClickedBtnQuit();
+	virtual void OnOK();
 };

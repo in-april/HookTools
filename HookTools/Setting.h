@@ -18,7 +18,8 @@ private:
 
 private:
 	int LoadCfgFile();
-	int ParserCfg(); // 解析配置文件
+	int JsonToObj(); // 将json转为对象
+	int ObjToJson(); // 将对象转为json
 
 public:
 	//std::vector<std::string> m_InjectType; //注入类型
@@ -28,5 +29,7 @@ public:
 	int Load(std::string path = CONFIG_PATH); //加载并解析配置文件
 	int Save(); //将新增的配置写回到json文件
 	int AddModule(std::string moduleName, std::string modulePath); //添加模块
+	int UpdateModule(int nIndex, std::string moduleName, std::string modulePath);
+	int DeleteModule(int nIndex);
 };
 

@@ -44,6 +44,10 @@ BEGIN_MESSAGE_MAP(CInjectToolsDlg, CDialogEx)
 	ON_BN_CLICKED(IDC_BTN_INJECT, &CInjectToolsDlg::OnBnClickedBtnInject)
 	ON_BN_CLICKED(IDC_BTN_ATTACH, &CInjectToolsDlg::OnBnClickedBtnAttach)
 	ON_BN_CLICKED(IDC_BTN_ADD_MODULE, &CInjectToolsDlg::OnBnClickedBtnAddModule)
+	ON_COMMAND(ID_32773, &CInjectToolsDlg::OnMenuUpdate)
+	ON_COMMAND(ID_32774, &CInjectToolsDlg::OnMenuDel)
+	ON_NOTIFY(NM_RCLICK, IDC_LIST3, &CInjectToolsDlg::OnNMRClickList3)
+	ON_BN_CLICKED(IDC_BTN_QUIT, &CInjectToolsDlg::OnBnClickedBtnQuit)
 END_MESSAGE_MAP()
 
 
@@ -247,4 +251,59 @@ void CInjectToolsDlg::OnBnClickedBtnAddModule()
 	{
 		ShowModules();
 	}
+}
+
+
+void CInjectToolsDlg::OnMenuUpdate()
+{
+	// TODO: 在此添加命令处理程序代码
+	CDialogAddModule dlg;
+	dlg.isEdit = true;
+	dlg.m_index = listSelect;
+	dlg.name = g_setting.m_modules[listSelect].moduleName;
+	dlg.path = g_setting.m_modules[listSelect].modulePath;
+	if (dlg.DoModal() == IDOK)
+	{
+		ShowModules();
+	}
+}
+
+
+void CInjectToolsDlg::OnMenuDel()
+{
+	// TODO: 在此添加命令处理程序代码
+	g_setting.DeleteModule(listSelect);
+	ShowModules();
+}
+
+
+void CInjectToolsDlg::OnNMRClickList3(NMHDR* pNMHDR, LRESULT* pResult)
+{
+	LPNMITEMACTIVATE pNMItemActivate = reinterpret_cast<LPNMITEMACTIVATE>(pNMHDR);
+	// TODO: 在此添加控件通知处理程序代码
+	listSelect = pNMItemActivate->iItem;
+	if (listSelect != -1)
+	{
+		DWORD dwPos = GetMessagePos();
+		CPoint point(LOWORD(dwPos), HIWORD(dwPos));
+		CMenu menu;
+		menu.LoadMenu(IDR_MODULE);
+		CMenu* popMenu = menu.GetSubMenu(0);
+		popMenu->TrackPopupMenu(TPM_LEFTALIGN | TPM_RIGHTBUTTON, point.x, point.y, this);
+	}
+}
+
+
+void CInjectToolsDlg::OnBnClickedBtnQuit()
+{
+	// TODO: 在此添加控件通知处理程序代码
+	CDialogEx::OnOK();
+}
+
+
+void CInjectToolsDlg::OnOK()
+{
+	// TODO: 在此添加专用代码和/或调用基类
+
+	//CDialogEx::OnOK();
 }

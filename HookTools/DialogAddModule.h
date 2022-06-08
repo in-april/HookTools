@@ -1,5 +1,5 @@
 ﻿#pragma once
-
+#include <string>
 
 // CDialogAddModule 对话框
 
@@ -23,6 +23,11 @@ protected:
 public:
 	CEdit m_edit_path;
 	CEdit m_edit_name;
+	std::string path;
+	std::string name;
+	bool isEdit;
+	int m_index;
 	afx_msg void OnBnClickedBtnOpen();
 	afx_msg void OnBnClickedBtnSave();
+	virtual BOOL OnInitDialog();
 };

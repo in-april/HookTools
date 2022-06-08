@@ -15,7 +15,8 @@ IMPLEMENT_DYNAMIC(CDialogAddModule, CDialogEx)
 CDialogAddModule::CDialogAddModule(CWnd* pParent /*=nullptr*/)
 	: CDialogEx(IDD_DIALOG_ADD_MODULE, pParent)
 {
-
+	isEdit = false;
+	m_index = 0;
 }
 
 CDialogAddModule::~CDialogAddModule()
@@ -59,9 +60,26 @@ void CDialogAddModule::OnBnClickedBtnSave()
 	// TODO: 在此添加控件通知处理程序代码
 	CString tmp;
 	m_edit_path.GetWindowText(tmp);
-	std::string path = tmp;
+	path = tmp;
 	m_edit_name.GetWindowText(tmp);
-	std::string name = tmp;
-	g_setting.AddModule(name, path);
+	name = tmp;
+	if(isEdit)
+		g_setting.UpdateModule(m_index, name, path);
+	else
+		g_setting.AddModule(name, path);
 	CDialog::OnOK();
+}
+
+
+
+BOOL CDialogAddModule::OnInitDialog()
+{
+	CDialogEx::OnInitDialog();
+
+	// TODO:  在此添加额外的初始化
+	m_edit_name.SetWindowText(name.c_str());
+	m_edit_path.SetWindowText(path.c_str());
+
+	return TRUE;  // return TRUE unless you set the focus to a control
+				  // 异常: OCX 属性页应返回 FALSE
 }

@@ -102,6 +102,7 @@ void CDialogAttach::OnNMRClickList1(NMHDR* pNMHDR, LRESULT* pResult)
 	LPNMITEMACTIVATE pNMItemActivate = reinterpret_cast<LPNMITEMACTIVATE>(pNMHDR);
 	// TODO: 在此添加控件通知处理程序代码
 	listSelect = pNMItemActivate->iItem;
+	listSelect = pNMItemActivate->iItem;
 	DWORD dwPos = GetMessagePos();
 	CPoint point(LOWORD(dwPos), HIWORD(dwPos));
 	CMenu menu;

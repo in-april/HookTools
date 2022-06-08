@@ -16,15 +16,9 @@ int CSetting::LoadCfgFile()
     return 0;
 }
 
-int CSetting::ParserCfg()
+int CSetting::JsonToObj()
 {
-	//m_InjectType.clear();
 	m_modules.clear();
-	//Json::Value types = m_root["InjectType"];
-	//for (unsigned i = 0; i < types.size(); i++)
-	//{
-	//	m_InjectType.push_back(types[i].asString());
-	//}
 	Json::Value modules = m_root["ModuleList"];
 	for (unsigned i = 0; i < modules.size(); i++)
 	{
@@ -36,11 +30,25 @@ int CSetting::ParserCfg()
     return 0;
 }
 
+int CSetting::ObjToJson()
+{
+	m_root.clear();
+	for (unsigned i = 0; i < m_modules.size(); i++)
+	{
+		Json::Value moduleTmp;
+		moduleTmp["name"] = m_modules[i].moduleName;
+		moduleTmp["path"] = m_modules[i].modulePath;
+		m_root["ModuleList"].append(moduleTmp);
+	}
+	Save();
+	return 0;
+}
+
 int CSetting::Load(std::string path)
 {
 	m_filePath = path;
 	LoadCfgFile();
-	ParserCfg();
+	JsonToObj();
 	return 0;
 }
 
@@ -56,12 +64,25 @@ int CSetting::Save()
 
 int CSetting::AddModule(std::string moduleName, std::string modulePath)
 {
-	Json::Value moduleTmp;
-	moduleTmp["name"] = moduleName;
-	moduleTmp["path"] = modulePath;
-	Json::Value& modules = m_root["ModuleList"];
-	modules.append(moduleTmp);
-	ParserCfg();
-	Save();
+	Module moduleTmp;
+	moduleTmp.moduleName = moduleName;
+	moduleTmp.modulePath = modulePath;
+	m_modules.push_back(moduleTmp);
+	ObjToJson();
+	return 0;
+}
+
+int CSetting::UpdateModule(int nIndex, std::string moduleName, std::string modulePath)
+{
+	m_modules[nIndex].moduleName = moduleName;
+	m_modules[nIndex].modulePath = modulePath;
+	ObjToJson();
+	return 0;
+}
+
+int CSetting::DeleteModule(int nIndex)
+{
+	m_modules.erase(m_modules.begin() + nIndex);
+	ObjToJson();
 	return 0;
 }
