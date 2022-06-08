@@ -6,12 +6,14 @@
 #define IDR_MAINFRAME                   128
 #define IDD_DIALOG_ATTACH               129
 #define IDR_MENU1                       131
+#define IDD_DIALOG_ADD_MODULE           132
 #define IDC_EDIT2                       1001
 #define IDC_EDIT_PATH                   1001
 #define IDC_BUTTON1                     1002
 #define IDC_BTN_OPEN                    1002
 #define IDC_EDIT3                       1003
 #define IDC_EDIT_PROC                   1003
+#define IDC_BTN_SAVE                    1003
 #define IDC_BUTTON2                     1004
 #define IDC_BTN_ATTACH                  1004
 #define IDC_LIST2                       1006
@@ -24,6 +26,7 @@
 #define IDC_BTN_INJECT                  1010
 #define IDC_BUTTON5                     1011
 #define IDC_LIST1                       1013
+#define IDC_EDIT1                       1014
 #define ID_ROOT_32771                   32771
 #define ID_ROOT_32772                   32772
 
@@ -31,9 +34,9 @@
 // 
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
-#define _APS_NEXT_RESOURCE_VALUE        132
+#define _APS_NEXT_RESOURCE_VALUE        134
 #define _APS_NEXT_COMMAND_VALUE         32773
-#define _APS_NEXT_CONTROL_VALUE         1014
+#define _APS_NEXT_CONTROL_VALUE         1015
 #define _APS_NEXT_SYMED_VALUE           101
 #endif
 #endif

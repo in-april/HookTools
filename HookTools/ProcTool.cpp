@@ -27,4 +27,5 @@ std::vector<ProcessInfo> CProcTool::GetProcessList()
     }
     //不要忘记清除掉snapshot对象
     ::CloseHandle(hProcessSnap);
+    return ret;
 }

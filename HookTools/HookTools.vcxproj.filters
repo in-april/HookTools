@@ -51,6 +51,9 @@
     <ClInclude Include="ProcTool.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="DialogAddModule.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="InjectTools.cpp">
@@ -72,6 +75,9 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="ProcTool.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="DialogAddModule.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>

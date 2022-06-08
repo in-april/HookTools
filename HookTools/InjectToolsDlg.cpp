@@ -14,6 +14,7 @@
 #include "Setting.h"
 #include "Inject.h"
 #include "DialogAttach.h"
+#include "DialogAddModule.h"
 
 CSetting g_setting;
 
@@ -42,6 +43,7 @@ BEGIN_MESSAGE_MAP(CInjectToolsDlg, CDialogEx)
 	ON_BN_CLICKED(IDC_BTN_OPEN, &CInjectToolsDlg::OnBnClickedBtnOpen)
 	ON_BN_CLICKED(IDC_BTN_INJECT, &CInjectToolsDlg::OnBnClickedBtnInject)
 	ON_BN_CLICKED(IDC_BTN_ATTACH, &CInjectToolsDlg::OnBnClickedBtnAttach)
+	ON_BN_CLICKED(IDC_BTN_ADD_MODULE, &CInjectToolsDlg::OnBnClickedBtnAddModule)
 END_MESSAGE_MAP()
 
 
@@ -59,10 +61,9 @@ BOOL CInjectToolsDlg::OnInitDialog()
 	// TODO: 在此添加额外的初始化代码
 	//加载配置文件
 	g_setting.Load();
-	for (std::string& type : g_setting.m_InjectType)
-	{
-		m_types.AddString(type.c_str());
-	}
+	m_types.AddString("入口点注入");
+	m_types.AddString("远程线程注入");
+	
 	m_types.SetCurSel(0);
 	//初始化list control
 	LONG_PTR lStyle;
@@ -84,15 +85,21 @@ BOOL CInjectToolsDlg::OnInitDialog()
 	m_modules.InsertColumn(0, "序号", 0, 70);
 	m_modules.InsertColumn(1, "模块名称", 0, 150);
 	m_modules.InsertColumn(2, "模块路径", 0, 400);
+	ShowModules();
+	
 
+	return TRUE;  // 除非将焦点设置到控件，否则返回 TRUE
+}
+
+void CInjectToolsDlg::ShowModules()
+{
+	m_modules.DeleteAllItems();
 	for (int i = 0; i < g_setting.m_modules.size(); i++)
 	{
 		m_modules.InsertItem(i, std::to_string(i + 1).c_str());
 		m_modules.SetItemText(i, 1, g_setting.m_modules[i].moduleName.c_str());
 		m_modules.SetItemText(i, 2, g_setting.m_modules[i].modulePath.c_str());
 	}
-
-	return TRUE;  // 除非将焦点设置到控件，否则返回 TRUE
 }
 
 // 如果向对话框添加最小化按钮，则需要下面的代码
@@ -228,5 +235,16 @@ void CInjectToolsDlg::OnBnClickedBtnAttach()
 	if (dlg.DoModal() == IDOK)
 	{
 		m_edit_proc.SetWindowTextA(dlg.m_pid);
+	}
+}
+
+
+void CInjectToolsDlg::OnBnClickedBtnAddModule()
+{
+	// TODO: 在此添加控件通知处理程序代码
+	CDialogAddModule dlg;
+	if (dlg.DoModal() == IDOK)
+	{
+		ShowModules();
 	}
 }

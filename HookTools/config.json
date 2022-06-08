@@ -1,8 +1,20 @@
 {
-	"InjectType" : ["入口点注入", "远程线程注入"],
-	"ModuleList" : [
-		{"name" : "test", "path" : "C:\\Users\\user\\source\\repos\\HookTools\\Debug\\TestDLL.dll"},
-		{"name" : "test", "path" : "c://123.dll"},
-		{"name" : "test", "path" : "c://123.dll"}
-	]
+   "ModuleList" : [
+      {
+         "name" : "test",
+         "path" : "C:\\Users\\user\\source\\repos\\HookTools\\Debug\\TestDLL.dll"
+      },
+      {
+         "name" : "test",
+         "path" : "c://123.dll"
+      },
+      {
+         "name" : "test",
+         "path" : "c://123.dll"
+      },
+      {
+         "name" : "libmysql.dll",
+         "path" : "D:\\mysql-8.0.21-winx64\\lib\\libmysql.dll"
+      }
+   ]
 }

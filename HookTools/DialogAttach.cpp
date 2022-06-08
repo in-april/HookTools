@@ -74,7 +74,8 @@ void CDialogAttach::ShowProcList()
 {
 	m_processList.DeleteAllItems();
 	std::vector<ProcessInfo> procList = CProcTool::GetProcessList();
-	for (int i = 0; i < procList.size(); i++)
+	int size = procList.size();
+	for (int i = 0; i < size; i++)
 	{
 		m_processList.InsertItem(i, std::to_string(i + 1).c_str());
 		m_processList.SetItemText(i, 1, std::to_string(procList[i].pid).c_str());

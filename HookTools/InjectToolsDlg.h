@@ -27,6 +27,7 @@ protected:
 
 	// 生成的消息映射函数
 	virtual BOOL OnInitDialog();
+	void ShowModules();
 	afx_msg void OnPaint();
 	afx_msg HCURSOR OnQueryDragIcon();
 	DECLARE_MESSAGE_MAP()
@@ -41,4 +42,5 @@ public:
 	afx_msg void OnBnClickedBtnOpen();
 	afx_msg void OnBnClickedBtnInject();
 	afx_msg void OnBnClickedBtnAttach();
+	afx_msg void OnBnClickedBtnAddModule();
 };

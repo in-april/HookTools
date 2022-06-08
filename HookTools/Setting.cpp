@@ -18,11 +18,13 @@ int CSetting::LoadCfgFile()
 
 int CSetting::ParserCfg()
 {
-	Json::Value types = m_root["InjectType"];
-	for (unsigned i = 0; i < types.size(); i++)
-	{
-		m_InjectType.push_back(types[i].asString());
-	}
+	//m_InjectType.clear();
+	m_modules.clear();
+	//Json::Value types = m_root["InjectType"];
+	//for (unsigned i = 0; i < types.size(); i++)
+	//{
+	//	m_InjectType.push_back(types[i].asString());
+	//}
 	Json::Value modules = m_root["ModuleList"];
 	for (unsigned i = 0; i < modules.size(); i++)
 	{
@@ -39,5 +41,27 @@ int CSetting::Load(std::string path)
 	m_filePath = path;
 	LoadCfgFile();
 	ParserCfg();
+	return 0;
+}
+
+int CSetting::Save()
+{
+	Json::StyledWriter swriter;
+	std::string str = swriter.write(m_root);
+	std::ofstream streamWriter(m_filePath, std::ios::binary);
+	streamWriter.write(str.c_str(), str.size());
+	streamWriter.close();
+	return 0;
+}
+
+int CSetting::AddModule(std::string moduleName, std::string modulePath)
+{
+	Json::Value moduleTmp;
+	moduleTmp["name"] = moduleName;
+	moduleTmp["path"] = modulePath;
+	Json::Value& modules = m_root["ModuleList"];
+	modules.append(moduleTmp);
+	ParserCfg();
+	Save();
 	return 0;
 }
