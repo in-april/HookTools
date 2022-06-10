@@ -1,0 +1,11 @@
+{
+   "FuncList" : [
+      {
+         "funcName" : "MessageBoxA",
+         "dllName" : "User32.dll",
+         "hookChangeCode" : 2,
+         "isExportFunc" : true,
+         "paramCount" : 4
+      }
+   ]
+}

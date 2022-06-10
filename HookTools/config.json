@@ -3,6 +3,10 @@
       {
          "name" : "test",
          "path" : "C:\\Users\\user\\source\\repos\\HookTools\\Debug\\TestDLL.dll"
+      },
+      {
+         "name" : "HookMod.dll",
+         "path" : "C:\\Users\\user\\source\\repos\\HookTools\\Release\\HookMod.dll"
       }
    ]
 }
