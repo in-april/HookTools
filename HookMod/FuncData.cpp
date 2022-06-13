@@ -3,6 +3,9 @@
 #include <fstream>
 #include "Logger.h"
 #include <memory>
+#include "DialogMain.h"
+
+extern CDialogMain* g_dlgMain;
 
 int CFuncData::LoadCfgFile()
 {
@@ -122,8 +125,9 @@ BOOL FuncShowParam(FuncItem* func, PCONTEXT context)
 			if (i < paramCount - 1) 
 				str += ',';
 		}
-		str += ")";
+		str += ")\r\n";
 
+		SendMessage(g_dlgMain->m_hWnd, WM_SHOW_DATA, (WPARAM)&str, NULL);
 		printLog(str.c_str());
 	}
 	return TRUE;

@@ -11,6 +11,7 @@
 
 CFuncData g_funcData;
 CHookTool g_hookTool;
+CDialogMain* g_dlgMain;
 // CDialogMain 对话框
 
 IMPLEMENT_DYNAMIC(CDialogMain, CDialog)
@@ -31,12 +32,14 @@ void CDialogMain::DoDataExchange(CDataExchange* pDX)
 	CDialog::DoDataExchange(pDX);
 	DDX_Control(pDX, IDC_LIST_FUNC, m_listFunc);
 	DDX_Text(pDX, IDC_EDIT1, m_content);
+	DDX_Control(pDX, IDC_EDIT_DATA, m_edit_data);
 }
 
 
 BEGIN_MESSAGE_MAP(CDialogMain, CDialog)
 	ON_NOTIFY(NM_CLICK, IDC_LIST_FUNC, &CDialogMain::OnNMClickListFunc)
 	ON_BN_CLICKED(IDC_BTN_SETHOOK, &CDialogMain::OnBnClickedBtnSethook)
+	ON_MESSAGE(WM_SHOW_DATA, &CDialogMain::OnShowData)
 END_MESSAGE_MAP()
 
 
@@ -48,6 +51,9 @@ BOOL CDialogMain::OnInitDialog()
 	CDialog::OnInitDialog();
 
 	// TODO:  在此添加额外的初始化
+	
+	g_dlgMain = this;
+
 	//初始化list control
 	LONG_PTR lStyle;
 	lStyle = GetWindowLongPtr(m_listFunc.m_hWnd, GWL_STYLE);
@@ -123,4 +129,14 @@ void CDialogMain::OnBnClickedBtnSethook()
 		}
 	}
 	AfxMessageBox("设置完成");
+}
+
+LRESULT CDialogMain::OnShowData(WPARAM wParam, LPARAM lParam)
+{
+	std::string* pStr = (std::string*)wParam;
+	CString curData;
+	m_edit_data.GetWindowText(curData);
+	curData += pStr->c_str();
+	m_edit_data.SetWindowText(curData);
+	return LRESULT();
 }

@@ -27,4 +27,7 @@ public:
 	void ShowFuncList();
 	afx_msg void OnNMClickListFunc(NMHDR* pNMHDR, LRESULT* pResult);
 	afx_msg void OnBnClickedBtnSethook();
+	// 显示数据
+	afx_msg LRESULT OnShowData(WPARAM wParam, LPARAM lParam);
+	CEdit m_edit_data;
 };

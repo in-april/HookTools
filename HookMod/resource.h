@@ -5,7 +5,7 @@
 #define IDD_DIALOG_MAIN                 1000
 #define IDC_LIST_FUNC                   1000
 #define IDC_EDIT1                       1001
-#define IDC_BUTTON1                     1002
+#define IDC_EDIT_DATA                   1001
 #define IDC_BTN_SETHOOK                 1002
 
 // Next default values for new objects

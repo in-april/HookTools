@@ -33,3 +33,4 @@
 #endif // _AFX_NO_AFXCMN_SUPPORT
 
 
+#define WM_SHOW_DATA (WM_USER + 1) //数据包响应时派发的消息
