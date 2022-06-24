@@ -9,6 +9,11 @@ struct FuncItem;
 //回调函数
 typedef BOOL(*PHookFunc)(FuncItem*, PCONTEXT);
 
+enum class ParamType
+{
+	Dword, StrA, StrW, Obj, Null
+};
+
 struct FuncItem
 {
 	DWORD address; // 函数首地址
@@ -18,6 +23,7 @@ struct FuncItem
 	DWORD retAddr; // 根据回调函数的返回值来确定是否要跳回到hook点
 	DWORD codeFixAddr; //修复函数的地址
 	DWORD paramCount; // 参数个数，默认一个参数占4字节，（TODO:后序导出函数的参数个数自动获取）
+	ParamType paramType[10]; //保存参数类型,最多10个参数
 	DWORD type; // hook类型
 	BOOL enable; // 是否启用
 	BOOL isSet; // 是否已经设置Hook

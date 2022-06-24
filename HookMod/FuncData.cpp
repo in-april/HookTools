@@ -35,6 +35,33 @@ int CFuncData::JsonToObj()
 		tmp.HookFunc = &FuncShowParam;
 		tmp.codeFixAddr = funcdata[i]["codeFixAddr"].asInt();
 		tmp.paramCount = funcdata[i]["paramCount"].asInt();
+		//处理参数类型
+		Json::Value types = funcdata[i]["paramType"];
+		for (unsigned j = 0; j < types.size(); j++)
+		{
+			std::string typeStr = types[j].asString();
+			if (typeStr.compare("Dword") == 0)
+			{
+				tmp.paramType[j] = ParamType::Dword;
+			}
+			else if (typeStr.compare("StrA") == 0)
+			{
+				tmp.paramType[j] = ParamType::StrA;
+			}
+			else if (typeStr.compare("StrW") == 0)
+			{
+				tmp.paramType[j] = ParamType::StrW;
+			}
+			else if(typeStr.compare("Obj") == 0)
+			{
+				tmp.paramType[j] = ParamType::Obj;
+			}
+			else
+			{
+				tmp.paramType[j] = ParamType::Null;
+			}
+		}
+
 		tmp.type = funcdata[i]["type"].asInt();
 		tmp.enable = funcdata[i]["enable"].asBool();
 		tmp.isSet = false;
@@ -111,6 +138,7 @@ void CFuncData::AddFuncItem(FuncItem& data)
 	
 }
 
+// 函数参数展示回调函数
 BOOL FuncShowParam(FuncItem* func, PCONTEXT context)
 {
 	std::string str;
@@ -121,7 +149,43 @@ BOOL FuncShowParam(FuncItem* func, PCONTEXT context)
 		for (int i = 0; i < paramCount; i++)
 		{
 			DWORD param = *(DWORD*)(context->Esp + (i + 1) * 4);
-			str = str + std::to_string(param);
+			//std::string out = std::to_string((int)func->paramType[i]);
+			//::SendMessage(g_dlgMain->m_hWnd, WM_SHOW_DATA, (WPARAM)&out, NULL);
+			switch (func->paramType[i])
+			{
+			case ParamType::Dword:
+			{
+				str = str + std::to_string(param);
+				break;
+			}
+			case ParamType::StrA:
+			{
+				char* p = (char*)param;
+				str += "\"";
+				str += p;
+				str += "\"";
+				break;
+			}
+			case ParamType::StrW:
+			{
+				std::wstring wStr = (wchar_t*)param;
+				std::string aStr(wStr.begin(), wStr.end());
+				str += "\"";
+				str += aStr;
+				str += "\"";
+				break;
+			}
+			case ParamType::Obj: // TODO：特殊处理
+			{
+				str = str + std::to_string(param);
+				break;
+			}
+			default:
+			{
+				str = str + "NULL";
+				break;
+			}
+			}
 			if (i < paramCount - 1) 
 				str += ',';
 		}

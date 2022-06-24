@@ -54,6 +54,11 @@ BOOL CDialogMain::OnInitDialog()
 	
 	g_dlgMain = this;
 
+	// 初始化显示面板
+	CFont cfont;
+	cfont.CreatePointFont(120, _T("黑体"), NULL);
+	m_edit_data.SetFont(&cfont);
+
 	//初始化list control
 	LONG_PTR lStyle;
 	lStyle = GetWindowLongPtr(m_listFunc.m_hWnd, GWL_STYLE);
@@ -128,7 +133,8 @@ void CDialogMain::OnBnClickedBtnSethook()
 			func->isSet = true;
 		}
 	}
-	AfxMessageBox("设置完成");
+	std::string out = "设置完成\r\n";
+	::SendMessage(g_dlgMain->m_hWnd, WM_SHOW_DATA, (WPARAM)&out, NULL);
 }
 
 LRESULT CDialogMain::OnShowData(WPARAM wParam, LPARAM lParam)

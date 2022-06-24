@@ -5,7 +5,16 @@
          "dllName" : "User32.dll",
          "hookChangeCode" : 2,
          "isExportFunc" : true,
-         "paramCount" : 4
+         "paramCount" : 4,
+         "paramType" : ["Dword","StrA","StrA","Dword"]
+      },
+      {
+         "funcName" : "MessageBoxW",
+         "dllName" : "User32.dll",
+         "hookChangeCode" : 2,
+         "isExportFunc" : true,
+         "paramCount" : 4,
+         "paramType" : ["Dword","StrW","StrW","Dword"]
       }
    ]
 }

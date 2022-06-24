@@ -32,6 +32,7 @@ BEGIN_MESSAGE_MAP(CTestDemoDlg, CDialogEx)
 	ON_WM_PAINT()
 	ON_WM_QUERYDRAGICON()
 	ON_BN_CLICKED(IDC_BUTTON1, &CTestDemoDlg::OnBnClickedButton1)
+	ON_BN_CLICKED(IDC_BUTTON2, &CTestDemoDlg::OnBnClickedButton2)
 END_MESSAGE_MAP()
 
 
@@ -92,5 +93,12 @@ HCURSOR CTestDemoDlg::OnQueryDragIcon()
 void CTestDemoDlg::OnBnClickedButton1()
 {
 	// TODO: 在此添加控件通知处理程序代码
-	::MessageBoxA(NULL, "hello world!", "Hello", MB_OK);
+	::MessageBoxA(NULL, "MessageBoxA is run", "Hello", MB_OK);
+}
+
+
+void CTestDemoDlg::OnBnClickedButton2()
+{
+	// TODO: 在此添加控件通知处理程序代码
+	::MessageBoxW(NULL, L"MessageBoxW is run", L"Hello", MB_OK);
 }
